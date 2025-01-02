@@ -1,0 +1,33 @@
+<configuration>
+    <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/jetrun-zhite.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 日志文件名模式 -->
+            <FileNamePattern>logs/jetrun-zhite.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <!-- 保留的历史日志文件的最大数量 -->
+            <MaxHistory>30</MaxHistory>
+            <!-- 设置时间滚动策略也使用文件大小触发，%i是索引号 -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- 单个日志文件的最大大小 -->
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- 注意：totalSizeCap 不适用于 TimeBasedRollingPolicy，
+                 如果需要限制总日志文件大小，你可能需要其他方法，如日志清理脚本。 -->
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.zhite" level="INFO" additivity="false">
+        <appender-ref ref="ROLLING" />
+    </logger>
+
+    <logger name="com.zhite" level="ERROR" additivity="false">
+        <appender-ref ref="ROLLING" />
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="ROLLING" />
+    </root>
+</configuration>

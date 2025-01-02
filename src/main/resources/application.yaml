@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: zhite
+    version: 1.0
+    description: 志特项目，海康摄像头对接
+    author: Jetron
+
